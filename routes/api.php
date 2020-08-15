@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('list', 'UserController@list');
+        Route::get('show/{id}', 'UserController@show');
+        Route::post('create', 'UserController@create');
+        Route::put('update', 'UserController@update');
+        Route::delete('delete/{id}', 'UserController@delete');
+    });
+// });
